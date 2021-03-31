@@ -72,7 +72,7 @@ void Entity::CheckCollisionsX(Entity* objects, int objectCount)
 }
 void Entity::AIJumper() {
     if (collidedBottom) jump = true;
-    //movement.y += jumpPower;
+    
 }
 
 void Entity::AIWalker() {
@@ -146,14 +146,16 @@ void Entity::Update(float deltaTime, Entity* player, Entity* platforms, int plat
     }
     CheckCollisionsY(platforms, platformCount);// Fix if needed
     CheckCollisionsX(platforms, platformCount);// Fix if needed
+    
+    if (entityType == ENEMY) {
+        AI(player);
+    }
 
     if (jump) {
         jump = false;
         velocity.y += jumpPower;
     }
-    if (entityType == ENEMY) {
-        AI(player);
-    }
+
     velocity.x = movement.x * speed;
     velocity += acceleration * deltaTime;
    
