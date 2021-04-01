@@ -19,7 +19,10 @@ bool Entity::CheckCollision(Entity* other)
     float xdist = fabs(position.x - other->position.x) - ((width + other->width) / 2.0f);
     float ydist = fabs(position.y - other->position.y) - ((height + other->height) / 2.0f);
 
-    if (xdist < 0 && ydist < 0) return true;
+    if (xdist < 0 && ydist < 0) {
+        lastCollision = other;
+        return true;
+    }
     return false;
 }
 
@@ -34,13 +37,17 @@ void Entity::CheckCollisionsY(Entity* objects, int objectCount)
             float ydist = fabs(position.y - object->position.y);
             float penetrationY = fabs(ydist - (height / 2.0f) - (object->height / 2.0f));
             if (velocity.y > 0) {
+               
                 position.y -= penetrationY;
                 velocity.y = 0;
+                              
                 collidedTop = true;
             }
             else if (velocity.y < 0) {
-                position.y += penetrationY;
-                velocity.y = 0;
+                if (object->entityType != ENEMY) {
+                    position.y += penetrationY;
+                    velocity.y = 0;
+                }
                 collidedBottom = true;
             }
         }
@@ -123,6 +130,7 @@ void Entity::Update(float deltaTime, Entity* player, Entity* platforms, int plat
     collidedBottom = false;
     collidedLeft = false;
     collidedRight = false;
+    lastCollision = NULL;
 
     
 
@@ -161,12 +169,6 @@ void Entity::Update(float deltaTime, Entity* player, Entity* platforms, int plat
    
     position.y += velocity.y * deltaTime; // Move on Y
     position.x += velocity.x * deltaTime; // Move on X
-    
-    //CheckCollisionsY(player, 1);
-    //CheckCollisionsX(player, 1);
-    //if (collidedTop) {
-      //  isActive = false;
-    //}
     
     modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::translate(modelMatrix, position);

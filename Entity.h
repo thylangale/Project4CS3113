@@ -58,6 +58,8 @@ public:
     bool collidedLeft = false;
     bool collidedRight = false;
 
+    Entity* lastCollision;
+
     Entity();
 
     bool CheckCollision(Entity* other);

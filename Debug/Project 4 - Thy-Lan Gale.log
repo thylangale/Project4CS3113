@@ -1,5 +1,3 @@
-﻿  Entity.cpp
-  main.cpp
-C:\NYU\Spring 2021\Game Programming\Project 4 - Thy-Lan Gale\Project 4 - Thy-Lan Gale\main.cpp(71,23): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  main.cpp
+C:\NYU\Spring 2021\Game Programming\Project 4 - Thy-Lan Gale\Project 4 - Thy-Lan Gale\main.cpp(73,23): warning C4018: '<': signed/unsigned mismatch
   Project 4 - Thy-Lan Gale.vcxproj -> C:\NYU\Spring 2021\Game Programming\Project 4 - Thy-Lan Gale\Debug\Project 4 - Thy-Lan Gale.exe
